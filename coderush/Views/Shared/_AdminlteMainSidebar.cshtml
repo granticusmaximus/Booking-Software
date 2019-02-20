@@ -1,0 +1,180 @@
+﻿@model coderush.Models.ApplicationUser
+@inject coderush.Data.ApplicationDbContext Context
+
+@{
+    UserProfile profile = Context.UserProfile.SingleOrDefault(x => x.ApplicationUserId.Equals(Model.Id));
+}
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="@profile.ProfilePicture" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>@profile.FirstName @profile.LastName</p>
+                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+        </div>
+
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+
+            <!-- Dashboard -->
+            <li class="@Html.IsSelected(module: MainModule.Dashboard) treeview">
+                <a href="#">
+                    <i class="fa fa-pie-chart"></i>
+                    <span>@MainModule.Dashboard</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@Html.IsSelected(controller: MainMenu.DashboardMain.ControllerName, action: MainMenu.DashboardMain.ActionName)">
+                        <a href="@MainMenu.DashboardMain.Path">
+                            <i class="fa fa-bar-chart"></i> <span>@MainMenu.DashboardMain.PageName</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Roster -->
+            <li class="@Html.IsSelected(module: MainModule.Roster) treeview">
+                <a href="#">
+                    <i class="fa fa-calendar"></i>
+                    <span>@MainModule.Roster</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@Html.IsSelected(controller: MainMenu.RosterMeetingRoom.ControllerName, action: MainMenu.RosterMeetingRoom.ActionName)">
+                        <a href="@MainMenu.RosterMeetingRoom.Path">
+                            <i class="fa fa-calendar-o"></i> <span>@MainMenu.RosterMeetingRoom.PageName</span>
+                        </a>
+                    </li>
+                    <li class="@Html.IsSelected(controller: MainMenu.RosterCar.ControllerName, action: MainMenu.RosterCar.ActionName)">
+                        <a href="@MainMenu.RosterCar.Path">
+                            <i class="fa fa-calendar-o"></i> <span>@MainMenu.RosterCar.PageName</span>
+                        </a>
+                    </li>
+                    <li class="@Html.IsSelected(controller: MainMenu.RosterGeneral.ControllerName, action: MainMenu.RosterGeneral.ActionName)">
+                        <a href="@MainMenu.RosterGeneral.Path">
+                            <i class="fa fa-calendar-o"></i> <span>@MainMenu.RosterGeneral.PageName</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Booking -->
+            <li class="@Html.IsSelected(module: MainModule.Booking) treeview">
+                <a href="#">
+                    <i class="fa fa-calendar-plus-o"></i>
+                    <span>@MainModule.Booking</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@Html.IsSelected(controller: MainMenu.BookMeetingRoom.ControllerName, action: MainMenu.BookMeetingRoom.ActionName)">
+                        <a href="@MainMenu.BookMeetingRoom.Path">
+                            <i class="fa fa-calendar-plus-o"></i> <span>@MainMenu.BookMeetingRoom.PageName</span>
+                        </a>
+                    </li>
+                    <li class="@Html.IsSelected(controller: MainMenu.BookCar.ControllerName, action: MainMenu.BookCar.ActionName)">
+                        <a href="@MainMenu.BookCar.Path">
+                            <i class="fa fa-calendar-plus-o"></i> <span>@MainMenu.BookCar.PageName</span>
+                        </a>
+                    </li>
+                    <li class="@Html.IsSelected(controller: MainMenu.BookGeneral.ControllerName, action: MainMenu.BookGeneral.ActionName)">
+                        <a href="@MainMenu.BookGeneral.Path">
+                            <i class="fa fa-calendar-plus-o"></i> <span>@MainMenu.BookGeneral.PageName</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Agenda -->
+            <li class="@Html.IsSelected(module: MainModule.Agenda) treeview">
+                <a href="#">
+                    <i class="fa fa-calendar-plus-o"></i>
+                    <span>@MainModule.Agenda</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@Html.IsSelected(controller: MainMenu.MyAgenda.ControllerName, action: MainMenu.MyAgenda.ActionName)">
+                        <a href="@MainMenu.MyAgenda.Path">
+                            <i class="fa fa-calendar-plus-o"></i> <span>@MainMenu.MyAgenda.PageName</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Config -->
+            <li class="@Html.IsSelected(module: MainModule.Config) treeview">
+                <a href="#">
+                    <i class="fa fa-gears"></i>
+                    <span>@MainModule.Config</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@Html.IsSelected(controller: MainMenu.MeetingRoom.ControllerName, action: MainMenu.MeetingRoom.ActionName)">
+                        <a href="@MainMenu.MeetingRoom.Path">
+                            <i class="fa fa-gear"></i> <span>@MainMenu.MeetingRoom.PageName</span>
+                        </a>
+                    </li>
+                    <li class="@Html.IsSelected(controller: MainMenu.Car.ControllerName, action: MainMenu.Car.ActionName)">
+                        <a href="@MainMenu.Car.Path">
+                            <i class="fa fa-gear"></i> <span>@MainMenu.Car.PageName</span>
+                        </a>
+                    </li>
+                    <li class="@Html.IsSelected(controller: MainMenu.General.ControllerName, action: MainMenu.General.ActionName)">
+                        <a href="@MainMenu.General.Path">
+                            <i class="fa fa-gear"></i> <span>@MainMenu.General.PageName</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- User & Role -->
+            <li class="@Html.IsSelected(module: MainModule.UserRole) treeview">
+                <a href="#">
+                    <i class="fa fa-users"></i>
+                    <span>@MainModule.UserRole</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@Html.IsSelected(controller: MainMenu.User.ControllerName, action: MainMenu.User.ActionName)">
+                        <a href="@MainMenu.User.Path">
+                            <i class="fa fa-user"></i> <span>@MainMenu.User.PageName</span>
+                        </a>
+                    </li>
+                    <li class="@Html.IsSelected(controller: MainMenu.ChangePassword.ControllerName, action: MainMenu.ChangePassword.ActionName)">
+                        <a href="@MainMenu.ChangePassword.Path">
+                            <i class="fa fa-lock"></i> <span>@MainMenu.ChangePassword.PageName</span>
+                        </a>
+                    </li>
+                    <li class="@Html.IsSelected(controller: MainMenu.Role.ControllerName, action: MainMenu.Role.ActionName)">
+                        <a href="@MainMenu.Role.Path">
+                            <i class="fa fa-user-circle-o"></i> <span>@MainMenu.Role.PageName</span>
+                        </a>
+                    </li>
+                    <li class="@Html.IsSelected(controller: MainMenu.ChangeRole.ControllerName, action: MainMenu.ChangeRole.ActionName)">
+                        <a href="@MainMenu.ChangeRole.Path">
+                            <i class="fa fa-user-secret"></i> <span>@MainMenu.ChangeRole.PageName</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

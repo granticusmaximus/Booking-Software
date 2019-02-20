@@ -1,0 +1,105 @@
+﻿@{
+    ViewData["Title"] = "My Personal Agenda";
+
+    ViewBag.HelpTitle = ViewData["Title"];
+    ViewBag.HelpMessage1 = "";
+    ViewBag.HelpMessage2 = "Double click cell to add new agenda.";
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title text-primary"><i class="fa fa-calendar-o"></i> @ViewData["Title"]</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div id="Schedule1"></div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+
+            </div>
+            <!-- /.box-footer-->
+        </div>
+        <!-- /.box -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+@section Styles{
+
+}
+
+@section Scripts{
+
+    <script type="text/javascript">
+    $(function () {
+
+        var dataManager = ej.DataManager({
+            url: "/api/MyAgenda/Get",
+            batchUrl: "/api/MyAgenda/Crud",
+            insertUrl: "/api/MyAgenda/Add",
+            updateUrl: "/api/MyAgenda/Update",
+            removeUrl: "/api/MyAgenda/Remove",
+            adaptor: new ej.UrlAdaptor(),
+        });
+
+        $("#Schedule1").ejSchedule({
+            width: "100%",
+            views: ["Day", "WorkWeek", "Week", "Month", "Agenda"],
+            agendaViewSettings: {
+                daysInAgenda: 30
+            },
+            startHour: 6,
+            endHour: 24,
+            workHours: {
+                highlight: true,
+                start: 8,
+                end: 22,
+            },
+            showTimeZoneFields: false,
+            currentDate: "@DateTime.Now",
+            showQuickWindow: false,
+            allowInline: false,
+            readOnly: false,
+            allowDragAndDrop: true,
+            enableAppointmentResize: true,
+            showLocationField: true,
+            prioritySettings: {
+                enable: false,
+            },
+            contextMenuSettings: {
+                enable: true,
+            },
+            appointmentSettings: {
+                dataSource: dataManager,
+                editFutureEventsOnly: false,
+                id: "MyAgendaId",
+                subject: "Subject",
+                startTime: "StartTime",
+                endTime: "EndTime",
+                description: "Description",
+                allDay: "AllDay",
+                recurrence: "Recurrence",
+                recurrenceRule: "RecurrenceRule",
+            },
+            orientation: ej.Schedule.Orientation.Vertical,
+        });
+
+
+    });
+    </script>
+}
